@@ -1,4 +1,4 @@
-namespace KataMaitreD;
+namespace Domain.MaitreD.States;
 
 public record OpenedBoutiqueRestaurant( int Capacity)  : I4State
 {

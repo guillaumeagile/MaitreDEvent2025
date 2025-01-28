@@ -1,6 +1,7 @@
-﻿using FluentAssertions;
+﻿using Domain.MaitreD;
+using Domain.MaitreD.Events;
+using FluentAssertions;
 using LanguageExt;
-using KataMaitreD;
 
 namespace MaitreDTests
 {

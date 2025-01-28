@@ -1,4 +1,7 @@
-﻿namespace KataMaitreD;
+﻿using Domain.MaitreD.Events;
+using Domain.MaitreD.States;
+
+namespace Domain.MaitreD;
 
 public record Hostess
 {

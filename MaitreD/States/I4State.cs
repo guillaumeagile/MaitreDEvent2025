@@ -1,4 +1,4 @@
-namespace KataMaitreD;
+namespace Domain.MaitreD.States;
 
 public interface I4State
 {

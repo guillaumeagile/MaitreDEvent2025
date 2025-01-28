@@ -1,4 +1,6 @@
-namespace KataMaitreD;
+using Domain.MaitreD.States;
+
+namespace Domain.MaitreD;
 
 public sealed class MaitreD : I4RestaurantStates<I4State>
 {
