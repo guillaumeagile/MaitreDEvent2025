@@ -10,7 +10,7 @@ public record Hostess
       _ =  eventInitial switch
         {
             CapacityAdded capacityAdded => CanAcceptGuests = capacityAdded.capacity > 0,
-            _ =>  false  // on retourne un bool ici, car void n'est pas un type
+            _ =>  false  // on retourne un bool ici, car void n'est pas un type de retour en C# (il n'y a pas de Unit comme en F# ou Kotlin)
         };
         return etatZero;
     }

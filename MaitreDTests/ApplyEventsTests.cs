@@ -73,8 +73,4 @@ namespace MaitreDTests
             hostess.CanAcceptGuests.Should().Be(false);
         }
     }
-
-    public record BookingAdded(int size) : I4Event;
-
-    public record AddMenu : I4Event;
 }
