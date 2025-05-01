@@ -57,7 +57,24 @@ namespace MaitreDTests
          
             hostess.CanAcceptGuests.Should().Be(false);
         }
+        
+        
+        [Fact]
+        public void AddedBookingMaxCapacityShouldNotAcceptGuest()
+        {
+            var eventInitial = new CapacityAdded ( capacity: 4);
+            var hostess = new Hostess();
+            var etatZero = MaitreD.Initial;   
+            
+            var newState = hostess.ApplyEvent( etatZero,  eventInitial);
+            var eventBooking = new BookingAdded ( size: 4);
+             newState = hostess.ApplyEvent( etatZero,  eventBooking);
+         
+            hostess.CanAcceptGuests.Should().Be(false);
+        }
     }
+
+    public record BookingAdded(int size) : I4Event;
 
     public record AddMenu : I4Event;
 }
