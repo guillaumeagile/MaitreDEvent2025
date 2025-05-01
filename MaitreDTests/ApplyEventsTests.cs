@@ -14,12 +14,12 @@ namespace MaitreDTests
             
             var hostess = new Hostess();
             
-            hostess.IsFullyBooked.Should().Be(true);
+            hostess.CanAcceptGuests.Should().Be(false);
         }
         
         
         [Fact]
-        public void Test1()
+        public void AddedCapaCityToFourShouldAcceptGuest()
         {
             var eventInitial = new CapacityAdded ( capacity: 4);
             var hostess = new Hostess();
@@ -27,7 +27,7 @@ namespace MaitreDTests
             
            var newState = hostess.ApplyEvent( etatZero,  eventInitial);
          
-            hostess.IsFullyBooked.Should().Be(false);
+            hostess.CanAcceptGuests.Should().Be(true);
         }
         
         
@@ -40,14 +40,14 @@ namespace MaitreDTests
             
             var newState = hostess.ApplyEvent( etatZero,  eventInitial);
          
-            hostess.IsFullyBooked.Should().Be(true);
+            hostess.CanAcceptGuests.Should().Be(false);
         }
         
         //  essayer du PBT avec https://github.com/AnthonyLloyd/CsCheck
         
         
         [Fact]
-        public void Test2()
+        public void AddedCapaCityToZeroShouldNotAcceptGuest()
         {
             var eventInitial = new CapacityAdded ( capacity: 0);
             var hostess = new Hostess();
@@ -55,7 +55,7 @@ namespace MaitreDTests
             
             var newState = hostess.ApplyEvent( etatZero,  eventInitial);
          
-            hostess.IsFullyBooked.Should().Be(true);
+            hostess.CanAcceptGuests.Should().Be(false);
         }
     }
 
