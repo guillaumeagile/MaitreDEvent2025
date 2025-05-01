@@ -7,14 +7,15 @@ public record Hostess
 {
     public I4State ApplyEvent(I4State etatZero, I4Event eventInitial)
     {
-        IsFullyBooked = eventInitial switch
+      _ =  eventInitial switch
         {
-            CapacityAdded capacityAdded => capacityAdded.capacity == 0,
-            _ => IsFullyBooked
+            CapacityAdded capacityAdded => CanAcceptGuests = capacityAdded.capacity > 0,
+            _ =>  false
         };
 
         return etatZero;
     }
 
-    public bool IsFullyBooked { get; private set; } = true;
+
+    public bool CanAcceptGuests { get; private set; } = false;
 }
