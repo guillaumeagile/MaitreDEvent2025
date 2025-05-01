@@ -10,9 +10,8 @@ public record Hostess
       _ =  eventInitial switch
         {
             CapacityAdded capacityAdded => CanAcceptGuests = capacityAdded.capacity > 0,
-            _ =>  false
+            _ =>  false  // on retourne un bool ici, car void n'est pas un type
         };
-
         return etatZero;
     }
 

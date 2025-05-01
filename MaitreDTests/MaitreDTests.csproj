@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.2"/>
+        <PackageReference Include="CsCheck" Version="4.2.0" />
         <PackageReference Include="FluentAssertions" Version="7.1.0" />
         <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
