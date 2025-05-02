@@ -1,5 +1,6 @@
 ﻿using Domain.MaitreD;
 using Domain.MaitreD.Events;
+using Domain.MaitreD.States;
 using FluentAssertions;
 using LanguageExt;
 
@@ -22,12 +23,14 @@ namespace MaitreDTests
         public void AddedCapaCityToFourShouldAcceptGuest()
         {
             var eventInitial = new CapacityAdded ( capacity: 4);
-            var hostess = new Hostess();
             var etatZero = MaitreD.Initial;   
             
-           var newState = hostess.ApplyEvent( etatZero,  eventInitial);
+           var newState = etatZero.ApplyEvent( eventInitial);
          
-            hostess.CanAcceptGuests.Should().Be(true);
+            newState.Should().BeAssignableTo<OpenedBoutiqueRestaurant>()
+                .Subject.CanAcceptGuests.Should().BeTrue();
+            (newState as OpenedBoutiqueRestaurant).Capacity .Should().Be(4);
+          
         }
         
         
@@ -35,12 +38,13 @@ namespace MaitreDTests
         public void EventAddMenuShouldNotChangeCapacity()
         {
             var eventInitial = new AddMenu ( );
-            var hostess = new Hostess();
+           
             var etatZero = MaitreD.Initial;   
             
-            var newState = hostess.ApplyEvent( etatZero,  eventInitial);
+            var newState = etatZero.ApplyEvent( eventInitial);
          
-            hostess.CanAcceptGuests.Should().Be(false);
+            newState.Should().BeAssignableTo<NotInitializedBoutiqueRestaurant>()
+                .Subject.CanAcceptGuests.Should().BeFalse();
         }
         
         //  essayer du PBT avec https://github.com/AnthonyLloyd/CsCheck
@@ -50,12 +54,12 @@ namespace MaitreDTests
         public void AddedCapaCityToZeroShouldNotAcceptGuest()
         {
             var eventInitial = new CapacityAdded ( capacity: 0);
-            var hostess = new Hostess();
             var etatZero = MaitreD.Initial;   
             
-            var newState = hostess.ApplyEvent( etatZero,  eventInitial);
+            var newState = etatZero.ApplyEvent(  eventInitial);
          
-            hostess.CanAcceptGuests.Should().Be(false);
+            newState.Should().BeAssignableTo<NotInitializedBoutiqueRestaurant>()
+                .Subject.CanAcceptGuests.Should().BeFalse();
         }
         
         
@@ -63,14 +67,14 @@ namespace MaitreDTests
         public void AddedBookingMaxCapacityShouldNotAcceptGuest()
         {
             var eventInitial = new CapacityAdded ( capacity: 4);
-            var hostess = new Hostess();
             var etatZero = MaitreD.Initial;   
             
-            var newState = hostess.ApplyEvent( etatZero,  eventInitial);
+            var newState = etatZero.ApplyEvent( eventInitial);
             var eventBooking = new BookingAdded ( size: 4);
-             newState = hostess.ApplyEvent( etatZero,  eventBooking);
+             newState = newState.ApplyEvent( eventBooking);
          
-            hostess.CanAcceptGuests.Should().Be(false);
+             newState.Should().BeAssignableTo<OpenedBoutiqueRestaurant>()
+                 .Subject.CanAcceptGuests.Should().BeFalse();
         }
     }
 }

@@ -7,12 +7,7 @@ public record Hostess
 {
     public I4State ApplyEvent(I4State etatZero, I4Event eventInitial)
     {
-      _ =  eventInitial switch
-        {
-            CapacityAdded capacityAdded => CanAcceptGuests = capacityAdded.capacity > 0,
-            _ =>  false  // on retourne un bool ici, car void n'est pas un type de retour en C# (il n'y a pas de Unit comme en F# ou Kotlin)
-        };
-        return etatZero;
+     throw new NotImplementedException(); 
     }
 
 
